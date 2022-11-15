@@ -49,7 +49,7 @@ a {
   transition: 0.5s;
 }
 
-.sidebar a {
+.sidebar li {
   padding: 17px 20px;
   text-decoration: none;
   margin-top: 25px;
@@ -62,14 +62,15 @@ a {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  cursor: pointer;
 }
-.sidebar a:hover{
+.sidebar li:hover{
   background: white;
   color: #21B96B;
   border-radius: 100%;
 }
 
-.sidebar a.active{
+.sidebar li.active{
   color: white;
   border-radius: 100%;
   background: #21B96B;
@@ -105,7 +106,7 @@ a {
   z-index: 4;
   margin-left: 25%;
 }
-ul {
+#Navigation ul {
   list-style-type: none;
   position: fixed;
   margin: 0;
@@ -115,18 +116,18 @@ ul {
   overflow: hidden;
   text-align: center;
 }
-li {
+#Navigation li {
   height: 50px;
   display: inline-block;
 }
-li a {
+#Navigation li a {
   display: block;
   color: white;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
-li a:hover {
+#Navigation li a:hover {
   background: rgba(224, 224, 224, 0.15);
   border-radius: 8px;
   text-decoration: none;
