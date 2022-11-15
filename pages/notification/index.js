@@ -12,7 +12,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { } from "@fortawesome/free-solid-svg-icons"
 
-function PetsIndex() {
+function NotificationIndex() {
     //Initial variable
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -42,12 +42,12 @@ function PetsIndex() {
             <main className={styles.main}>
                 <Sidebar />
                 <div className="content_layout" id="main">
-                    <h5>Dashboard</h5>
+                    <h5>History</h5>
                 </div>
             </main>
         </div>
     )
   }
   
-  export default PetsIndex;
+  export default NotificationIndex;
   
