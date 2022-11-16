@@ -13,6 +13,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMars, faVirus, faBowlFood, faBath, faHandSparkles, faBell, faHeart, faArrowRight, faArrowLeft} from "@fortawesome/free-solid-svg-icons"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
+import PetsBox from '../../components/box/pets'
 
 function PetsIndex() {
     //Initial variable
@@ -56,9 +57,24 @@ function PetsIndex() {
                         <button className={petStyle.add_pets}><FontAwesomeIcon icon={faPlus} width="13px"/> Add Pets</button>
                         <div className='col-11 pets_list_section'>
                             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
+                                <div className="carousel-indicators">
+                                    {                                      
+                                        Array.apply(null, Array(crsl)).map((val, i, index) => {
+                                            if(i == 0){
+                                                return (
+                                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1" key={i}></button>
+                                                )
+                                            } else {
+                                                return (
+                                                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to={i.toString()} aria-label={"Slides "+ i.toString()} key={i}></button>
+                                                )
+                                            }
+                                        })   
+                                    }   
+                                </div>
                                 <div className="carousel-inner">
                                     {                                        
-                                        Array.apply(null, Array(crsl)).map((val2, i, index) => {
+                                        Array.apply(null, Array(crsl)).map((val, i, index) => {
                                             function getClassCarousel(){
                                                 if(i == 0){
                                                     return "carousel-item active";
@@ -66,50 +82,11 @@ function PetsIndex() {
                                                     return "carousel-item";
                                                 }
                                             }
-
-                                            function getPetsBox(){
-                                                data.map((val, i, index) => {
-                                                    
-                                                    return (
-                                                        <div className='col-4 pe-0'>
-                                                            <div className='pets_box m-0' style={{'background-image': "url('../../z_1-removebg-preview.png')" }} title="See Detail">
-                                                                <div className='pets_box_body'>
-                                                                    <h3 className='mb-2'>{val.pets_name}</h3>
-                                                                    <div className='pets_tag-holder'>
-                                                                        {/* Pets favorite */}
-                                                                        <button className='btn-danger'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
-                                                                        {/* Pets age */}
-                                                                        <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> 2 mo </button>
-                                                                        {/* Pets gender */}
-                                                                        <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
-                                                                        {/* Pets sickness status */}
-                                                                        <button className='btn-danger' title='This pets is sick'><FontAwesomeIcon icon={faVirus} width="14px"/> </button>
-                                                                        {/* Pets feed schedule */}
-                                                                        <button className='btn-tag' title='0.5 sachet of worm/day'><FontAwesomeIcon icon={faBowlFood} width="14px"/> Daily</button>
-                                                                        {/* Pets cleaning schedule */}
-                                                                        <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faBath} width="14px"/> Weekly</button>
-                                                                        {/* Pets total */}
-                                                                        <button className='btn-tag' title='2 similiar pets'>x 2</button>
-                                                                        {/* Pets's cage cleaning schedule */}
-                                                                        <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faHandSparkles} width="14px"/> Weekly</button>
-                                                                        {/* Pets feeding notification */}
-                                                                        <button className='btn-danger'><FontAwesomeIcon icon={faBell} width="11px"/> Time to feed!</button>
-                                                                    </div>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                                    <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                   
-                                                })
-                                            }
                                             
                                             return (
                                                 <div className={getClassCarousel()} key={i}>
                                                     <div className='row pe-5'>
-                                                        {getPetsBox()}
+                                                        <PetsBox props={data} crslLength={i+1}/>
                                                     </div>
                                                 </div>
                                             );
