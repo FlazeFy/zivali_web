@@ -7,7 +7,7 @@ body {
 
 a {
   color: inherit;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .content_layout{
@@ -144,8 +144,8 @@ a {
   background: #0098d4;
   border: none;
   border-radius: 6px;
-  margin-right: 4px;
-  margin-bottom: 4px;
+  margin-right: 5px;
+  margin-bottom: 5px;
   padding: 4px 8px;
   font-size: 13px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -185,13 +185,11 @@ a {
 
 /*Pets box*/
 .pets_list_section .pets_box{
-  margin-right: 20px;
-  width: 350px;
+  width: 100%;
   /* background: rgb(135, 139, 213); */
   height: 195px;
   border-radius: 10px;
   color:white;
-  padding: 10px 15px;
   cursor: pointer;
   display: inline-block;
   background-color:rgb(135, 139, 213);
@@ -199,11 +197,13 @@ a {
   transition: 0.6s;
 }
 .pets_box_body{
-  position: absolute;
-  margin-top: 90px;
+  border-radius: 10px;
+  margin-top: 85px;
+  padding: 0px 15px;
   transition: 0.6s;
-  width: 330px;
-  overflow: auto !important;
+  width: 100%;
+  height: 100% !important;
+  overflow: hidden;
 }
 .pets_box_body h3{
   font-size: 26px;
@@ -244,13 +244,40 @@ a {
 }
 
 /*Pets box hover*/
-.pets_list_section .pets_box:hover{
-  background-image: linear-gradient(to right, #44a65e, #6ab87f) !important;
-}
 .pets_box:hover .pets_box_body{
   margin-top: 0px;
   height: 180px;
+  overflow: auto !important;
+  background-color:rgba(0, 0, 0, 0.6);
 }
 .pets_box:hover p{
   display:grid
+}
+
+/*Carousel*/
+.carousel-control{
+  width: 40px !important;
+  height: 40px !important;
+  color: #21B96B !important;
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 100%;
+  border: none;
+  background: white;
+}
+
+.carousel-control.next{
+  position: absolute;
+  right: -10px !important;
+  top:14vh !important;
+}
+.carousel-control.prev{
+  position: absolute;
+  right: -10px !important;
+  top:7vh !important;
+}
+
+.carousel-control:hover{
+  background: #21B96B !important;
+  color: white !important;
 }
