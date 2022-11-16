@@ -18,20 +18,27 @@ function PetsIndex() {
     //Initial variable
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [items, setItems] = useState([]);
   
     useEffect(() => {
-      fetch()
-      .then(res => res.json())
-      .then(
+        fetch("http://localhost:9000/getAllPets")
+        .then(res => res.json())
+        .then(
         (result) => {
-            setIsLoaded(true);      
+            setIsLoaded(true);
+            setItems(result.data);
         },
         (error) => {
             setIsLoaded(true);
             setError(error);
         }
-      )
+        )
     },[])
+
+    //Converter
+    const data = Object.values(items);
+    const crsl = Math.ceil(data.length / 3);
+    const count = 0;
   
     return (
         <div className={styles.container}>
@@ -50,61 +57,63 @@ function PetsIndex() {
                         <div className='col-11 pets_list_section'>
                             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                                 <div className="carousel-inner">
-                                    {
-                                        <div className="carousel-item active">
-                                            <div className='row pe-5'>
-                                                <div className='col-4 pe-0'>
-                                                    <div className='pets_box m-0' style={{'background-image': "url('../../z_1-removebg-preview.png')" }} title="See Detail">
-                                                        <div className='pets_box_body'>
-                                                            <h3 className='mb-2'>Ashley</h3>
-                                                            <div className='pets_tag-holder'>
-                                                                {/* Pets favorite */}
-                                                                <button className='btn-danger'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
-                                                                {/* Pets age */}
-                                                                <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> 2 mo </button>
-                                                                {/* Pets gender */}
-                                                                <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
-                                                                {/* Pets sickness status */}
-                                                                <button className='btn-danger' title='This pets is sick'><FontAwesomeIcon icon={faVirus} width="14px"/> </button>
-                                                                {/* Pets feed schedule */}
-                                                                <button className='btn-tag' title='0.5 sachet of worm/day'><FontAwesomeIcon icon={faBowlFood} width="14px"/> Daily</button>
-                                                                {/* Pets cleaning schedule */}
-                                                                <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faBath} width="14px"/> Weekly</button>
-                                                                {/* Pets total */}
-                                                                <button className='btn-tag' title='2 similiar pets'>x 2</button>
-                                                                {/* Pets's cage cleaning schedule */}
-                                                                <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faHandSparkles} width="14px"/> Weekly</button>
-                                                                {/* Pets feeding notification */}
-                                                                <button className='btn-danger'><FontAwesomeIcon icon={faBell} width="11px"/> Time to feed!</button>
+                                    {                                        
+                                        Array.apply(null, Array(crsl)).map((val2, i, index) => {
+                                            function getClassCarousel(){
+                                                if(i == 0){
+                                                    return "carousel-item active";
+                                                } else {
+                                                    return "carousel-item";
+                                                }
+                                            }
+
+                                            function getPetsBox(){
+                                                data.map((val, i, index) => {
+                                                    
+                                                    return (
+                                                        <div className='col-4 pe-0'>
+                                                            <div className='pets_box m-0' style={{'background-image': "url('../../z_1-removebg-preview.png')" }} title="See Detail">
+                                                                <div className='pets_box_body'>
+                                                                    <h3 className='mb-2'>{val.pets_name}</h3>
+                                                                    <div className='pets_tag-holder'>
+                                                                        {/* Pets favorite */}
+                                                                        <button className='btn-danger'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
+                                                                        {/* Pets age */}
+                                                                        <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> 2 mo </button>
+                                                                        {/* Pets gender */}
+                                                                        <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
+                                                                        {/* Pets sickness status */}
+                                                                        <button className='btn-danger' title='This pets is sick'><FontAwesomeIcon icon={faVirus} width="14px"/> </button>
+                                                                        {/* Pets feed schedule */}
+                                                                        <button className='btn-tag' title='0.5 sachet of worm/day'><FontAwesomeIcon icon={faBowlFood} width="14px"/> Daily</button>
+                                                                        {/* Pets cleaning schedule */}
+                                                                        <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faBath} width="14px"/> Weekly</button>
+                                                                        {/* Pets total */}
+                                                                        <button className='btn-tag' title='2 similiar pets'>x 2</button>
+                                                                        {/* Pets's cage cleaning schedule */}
+                                                                        <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faHandSparkles} width="14px"/> Weekly</button>
+                                                                        {/* Pets feeding notification */}
+                                                                        <button className='btn-danger'><FontAwesomeIcon icon={faBell} width="11px"/> Time to feed!</button>
+                                                                    </div>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                                                                    <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
+                                                                </div>
                                                             </div>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
                                                         </div>
+                                                    )
+                                                   
+                                                })
+                                            }
+                                            
+                                            return (
+                                                <div className={getClassCarousel()} key={i}>
+                                                    <div className='row pe-5'>
+                                                        {getPetsBox()}
                                                     </div>
                                                 </div>
-                                                <div className='col-4 pe-0'>
-                                                    <div className='pets_box m-0' style={{'background-image': "url('../../z_2-removebg-preview.png')" }} title="See Detail">
-                                                        <div className='pets_box_body'>
-                                                            <h3>Ashley</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div className='col-4 pe-0'>
-                                                    <div className='pets_box m-0' style={{'background-image': "url('../../z_2-removebg-preview.png')" }} title="See Detail">
-                                                        <div className='pets_box_body'>
-                                                            <h3>Ashley</h3>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
-                                                            <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>   
-                                        </div>
+                                            );
+                                        })
                                     }
                                 </div>
                                 <button className="carousel-control prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" title='Previous'>
