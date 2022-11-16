@@ -43,6 +43,54 @@ function SetupIndex() {
                 <Sidebar />
                 <div className="content_layout" id="main">
                     <h5>Tools</h5>
+                    <div className={petStyle.pets_box} style={{'background-image': "url('../../z_1-removebg-preview.png')" }} title="See Detail">
+                        <div className={petStyle.pets_box_body}>
+                            <h3>Ashley</h3>
+                            <div className={petStyle.pets_tag_holder}>
+                                {/* Pets favorite */}
+                                <button className='btn-danger'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
+                                {/* Pets age */}
+                                <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> 2 mo </button>
+                                {/* Pets gender */}
+                                <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
+                                {/* Pets sickness status */}
+                                <button className='btn-danger' title='This pets is sick'><FontAwesomeIcon icon={faVirus} width="14px"/> </button>
+                                {/* Pets feed schedule */}
+                                <button className='btn-tag' title='0.5 sachet of worm/day'><FontAwesomeIcon icon={faBowlFood} width="14px"/> Daily</button>
+                                {/* Pets cleaning schedule */}
+                                <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faBath} width="14px"/> Weekly</button>
+                                {/* Pets total */}
+                                <button className='btn-tag' title='2 similiar pets'>x 2</button>
+                                {/* Pets's cage cleaning schedule */}
+                                <button className='btn-tag' title='1/week'><FontAwesomeIcon icon={faHandSparkles} width="14px"/> Weekly</button>
+                                {/* Pets feeding notification */}
+                                <button className='btn-danger'><FontAwesomeIcon icon={faBell} width="11px"/> Time to feed!</button>
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                            <p className='date-text'>Last updated : 16/Nov/22 10:20</p>
+                        </div>
+                    </div>
+                    <div className={petStyle.pets_box} style={{'background-image': "url('../../z_2-removebg-preview.png')" }}>
+                        <div className={petStyle.pets_box_body}>
+                            <h3>Ashley</h3>
+                        </div>
+                    </div>
+                    <div className={petStyle.pets_box} style={{'background-image': "url('../../z_2-removebg-preview.png')" }}>
+                        <div className={petStyle.pets_box_body}>
+                            <h3>Ashley</h3>
+                        </div>
+                    </div>
+                    <div className={petStyle.pets_box} style={{'background-image': "url('../../z_2-removebg-preview.png')" }}>
+                        <div className={petStyle.pets_box_body}>
+                            <h3>Ashley</h3>
+                        </div>
+                    </div>
+                    <div className={petStyle.pets_box} style={{'background-image': "url('../../z_3-removebg-preview.png')" }}>
+                        <div className={petStyle.pets_box_body}>
+                            <h3>Ashley</h3>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

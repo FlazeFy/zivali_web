@@ -2,8 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Arial';
 }
 
 a {
@@ -63,6 +62,7 @@ a {
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   cursor: pointer;
+  color: white;
 }
 .sidebar li:hover{
   background: white;
@@ -138,4 +138,119 @@ a {
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
+}
+
+.btn-tag{
+  background: #0098d4;
+  border: none;
+  border-radius: 6px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding: 4px 8px;
+  font-size: 13px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.btn-tag.female{
+  background: #DE5F85;
+}
+.btn-tag.male{
+  background: #0098d4;
+}
+.btn-danger{
+  background: #d6416e;
+  border: none;
+  font-size: 13px;
+  border-radius: 6px;
+  margin-right: 4px;
+  padding: 4px 8px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+}
+.btn-tag:hover{
+  background: #3D81E7;
+}
+.date-text{
+  font-style: italic;
+  font-size: 12px !important;
+}
+
+.pets_list_section{
+  position: absolute;
+  left: 70px;
+  top: 0px;
+}
+
+
+/*Pets box*/
+.pets_list_section .pets_box{
+  margin-right: 20px;
+  width: 350px;
+  /* background: rgb(135, 139, 213); */
+  height: 195px;
+  border-radius: 10px;
+  color:white;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: inline-block;
+  background-color:rgb(135, 139, 213);
+  background-size: cover;
+  transition: 0.6s;
+}
+.pets_box_body{
+  position: absolute;
+  margin-top: 90px;
+  transition: 0.6s;
+  width: 330px;
+  overflow: auto !important;
+}
+.pets_box_body h3{
+  font-size: 26px;
+  margin: 0px;
+}
+.pets_box_body h4{
+  font-size: 16px;
+  margin: 0px;
+  font-weight: 400;
+}
+.pets_box_body p{
+  font-size: 13.5px;
+  display: none;
+  max-width: 330px;
+}
+.pets_box_body .pets_tag_holder{
+  max-width: 330px;
+}
+
+/* width */
+.pets_box_body::-webkit-scrollbar {
+  width: 10px;
+}
+/* Track */
+.pets_box_body::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgb(205, 205, 205); 
+  border-radius: 10px;
+  background: white;
+}
+/* Handle */
+.pets_box_body::-webkit-scrollbar-thumb {
+  background: #318DE7; 
+  border-radius: 10px;
+}
+/* Handle on hover */
+.pets_box_body::-webkit-scrollbar-thumb:hover {
+  background: #318DE7; 
+}
+
+/*Pets box hover*/
+.pets_list_section .pets_box:hover{
+  background-image: linear-gradient(to right, #44a65e, #6ab87f) !important;
+}
+.pets_box:hover .pets_box_body{
+  margin-top: 0px;
+  height: 180px;
+}
+.pets_box:hover p{
+  display:grid
 }
