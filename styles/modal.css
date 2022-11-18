@@ -53,14 +53,15 @@
     cursor: pointer;
 }
 
-.btn-form-header-toogle.favorite{
+.btn-form-header-toogle.favorite, .btn-form-header-toogle.normal:hover{
     background: white;
     color: #d6416e;
 }
-.btn-form-header-toogle.favorite:hover, .btn-form-header-toogle.female{
+.btn-form-header-toogle.favorite:hover, .btn-form-header-toogle.female, .btn-form-header-toogle.normal{
     color: white;
     background: #d6416e;
 }
+
 .btn-form-header-toogle.male{
     background: #0098d4;
     color: white;
