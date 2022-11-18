@@ -1,4 +1,5 @@
 import '../styles/globals.css'
+import '../styles/modal.css'
 import 'bootstrap/dist/css/bootstrap.css'
 
 import { useEffect } from "react";

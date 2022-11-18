@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMars, faVirus, faBowlFood, faBath, faHandSparkles, faBell, faHeart, faArrowRight, faArrowLeft} from "@fortawesome/free-solid-svg-icons"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 import PetsBox from '../../components/box/pets'
+import AddPets from '../../components/layouts/add-pets'
 
 function PetsIndex() {
     //Initial variable
@@ -54,7 +55,9 @@ function PetsIndex() {
                 <div className="content_layout" id="main">
                     <h3>Dashboard</h3>
                     <div className={petStyle.pets_control_section}>
-                        <button className={petStyle.add_pets}><FontAwesomeIcon icon={faPlus} width="13px"/> Add Pets</button>
+                        <button className={petStyle.add_pets} data-bs-toggle="modal" data-bs-target="#addPetsModal"><FontAwesomeIcon icon={faPlus} width="13px"/> Add Pets</button>
+                        <AddPets />
+                        
                         <div className='col-11 pets_list_section'>
                             <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                                 <div className="carousel-indicators">

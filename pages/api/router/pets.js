@@ -18,4 +18,15 @@ router.get('/getAllPets', (req, res) => {
     })
 })
 
+//Get all pets type
+router.get('/getAllPetsType', (req, res) => {
+    connection.query('SELECT * FROM pets_type ORDER by updated_at', (error, rows, fields) => {
+        if (error) {
+            res.status(500).send(error)
+        } else {
+            res.status(200).json({ msg: rows.length + " Data retrived", status: 200, data: rows })
+        }
+    })
+})
+
 module.exports = router

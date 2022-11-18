@@ -1,0 +1,75 @@
+.modal-content{
+    border-radius:15px !important; 
+    border: none !important;
+}
+.modal-body{
+    position: relative;
+    padding: 0px !important; 
+}
+.modal-body .modal-title{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+}
+.modal-body .btn-close{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.modal-body .modal-select-image-show{
+    height: 35vh;
+    border-radius:15px 15px 0px 0px;
+    background: #878bd5;
+    background-position: center;
+    background-repeat:no-repeat;
+    position: relative;
+    background-size: cover;
+}
+.modal-body .modal-form-body{
+    height: 55vh;
+    position: relative;
+}
+.modal-body-header-set{
+    position: absolute;
+    top: -30px;
+    width: 100%;
+    display: block !important;
+    margin: auto !important;
+}
+.modal-body-header-set .btn-form-header-toogle{
+    width: 60px;
+    height: 60px;
+    border: none;
+    border-radius: 100%;
+    margin: auto;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: 0.5s;
+    margin-left: 15px;
+}
+
+.btn-form-header-toogle:hover{
+    transform: rotate(360deg);
+    cursor: pointer;
+}
+
+.btn-form-header-toogle.favorite{
+    background: white;
+    color: #d6416e;
+}
+.btn-form-header-toogle.favorite:hover, .btn-form-header-toogle.female{
+    color: white;
+    background: #d6416e;
+}
+.btn-form-header-toogle.male{
+    background: #0098d4;
+    color: white;
+}
+.btn-form-header-toogle.upload{
+    color: #21B96B;
+    background: white;
+}
+.btn-form-header-toogle.upload:hover, .btn-form-header-toogle.save{
+    background: #21B96B;
+    color: white;
+}

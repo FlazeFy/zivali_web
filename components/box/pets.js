@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 //Font awesome icon
 import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faMars, faVirus, faBowlFood, faBath, faHandSparkles, faBell, faHeart, faArrowRight, faArrowLeft, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faMars, faVirus, faBowlFood, faBath, faHandSparkles, faBell, faHeart, faArrowRight, faArrowLeft, faTriangleExclamation, faVenus} from "@fortawesome/free-solid-svg-icons"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
 
 const PetsBox = ({props, crslLength}) => {
@@ -69,6 +69,7 @@ const PetsBox = ({props, crslLength}) => {
         }
     }
 
+    //Pets status
     function getPetsStatus(status){
         if(status == "sick"){
             return (
@@ -77,6 +78,19 @@ const PetsBox = ({props, crslLength}) => {
         } else if(status == "pregnant"){
             return (
                 <button className='btn-danger' title='This pets is pregnant'><FontAwesomeIcon icon={faTriangleExclamation} width="14px"/> </button>
+            );
+        }
+    }
+
+    //Pets status
+    function getPetsGender(gender){
+        if(gender == "male"){
+            return (
+                <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
+            );
+        } else if(gender == "female"){
+            return (
+                <button className='btn-tag female' title='Gender : Female'><FontAwesomeIcon icon={faVenus} width="14px"/> </button>
             );
         }
     }
@@ -89,7 +103,7 @@ const PetsBox = ({props, crslLength}) => {
                         if((crslLength > 1) && (i >= 3 * (crslLength -1)) && (i <= 3 * crslLength)){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
-                                    <div className='pets_box m-0' style={{'background-image': "url('../../"+val.pets_url_image+"')", 'background-color': getColorSet(i) }} title="See Detail">
+                                    <div className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail">
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
@@ -98,7 +112,7 @@ const PetsBox = ({props, crslLength}) => {
                                                 {/* Pets age */}
                                                 <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> {ageConvert(val.pets_born)}</button>
                                                 {/* Pets gender */}
-                                                <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
+                                                {getPetsGender(val.pets_gender)}
                                                 {/* Pets sickness status */}
                                                 {getPetsStatus(val.pets_status)}
                                                 {/* Pets feed schedule */}
@@ -121,7 +135,7 @@ const PetsBox = ({props, crslLength}) => {
                         } else if(crslLength == 1){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
-                                    <div className='pets_box m-0' style={{'background-image': "url('../../"+val.pets_url_image+"')", 'background-color': getColorSet(i) }} title="See Detail">
+                                    <div className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail">
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
@@ -130,7 +144,7 @@ const PetsBox = ({props, crslLength}) => {
                                                 {/* Pets age */}
                                                 <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> {ageConvert(val.pets_born)}</button>
                                                 {/* Pets gender */}
-                                                <button className='btn-tag male' title='Gender : Male'><FontAwesomeIcon icon={faMars} width="14px"/> </button>
+                                                {getPetsGender(val.pets_gender)}
                                                 {/* Pets sickness status */}
                                                 {getPetsStatus(val.pets_status)}
                                                 {/* Pets feed schedule */}
