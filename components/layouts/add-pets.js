@@ -22,6 +22,10 @@ function AddPets() {
     const [petsBorn, setPetsBorn] = useState("");
     const [petsDesc, setPetsDesc] = useState("");
     const [items, setItems] = useState([]);
+
+    //Error message
+    const [err_dateBorn, setErrorMsg_dateBorn] = useState("");
+    const [err_petsName, setErrorMsg_petsName] = useState("");
   
     useEffect(() => {
       fetch("http://localhost:9000/getAllPetsType")
@@ -94,12 +98,34 @@ function AddPets() {
     }
 
     function getSubmitButton(){
-      if((petsName.length != 0)&&(typeof document !== "undefined")){
+      if((petsName.length != 0)&&(typeof document !== "undefined")&&(err_dateBorn == "")&&(err_petsName == "")){
         return (
           <button className='btn-form-header-toogle save float-end' title='Save new pets' style={{'marginRight': "15px" }} onClick={(e)=> addPets()}
             ><FontAwesomeIcon icon={faSave} width="20px"/></button>
         );
       } 
+    }
+
+    //Validator
+    function validateDateBorn(datetime){
+      var today = new Date();
+      var check = new Date(datetime);
+
+      if(check >= today){
+        setErrorMsg_dateBorn("Date invalid. Can't set date in the future");
+      } else {
+        setErrorMsg_dateBorn("");
+        setPetsBorn(datetime);
+      }
+    }
+
+    function validatePetsName(name){
+      if(name.length > 75){
+        setErrorMsg_petsName("Input invalid. Reach maximum available character");
+      } else {
+        setErrorMsg_petsName("");
+        setPetsName(name);
+      }
     }
 
     var loadFile = function(event) {
@@ -110,7 +136,7 @@ function AddPets() {
     };
   
     return (
-      <div className="modal fade" id="addPetsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="addPetsModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-body">
@@ -129,8 +155,8 @@ function AddPets() {
                 <form className='p-3'>
                   <div className='row'>
                     <div className='col-lg-6 col-md-6 col-sm-12'>
-                      <label className='mt-4'>Pets Name</label>
-                      <input className='form-control mt-1' type={'text'} onChange={(e)=> setPetsName(e.target.value)} onBlur={(e)=> getSubmitButton()}></input>
+                      <label className='mt-4'>Pets Name <b className='label-warning'>{err_petsName}</b></label>
+                      <input className='form-control mt-1' type={'text'} onChange={(e)=> validatePetsName(e.target.value)} onBlur={(e)=> getSubmitButton()}></input>
                       <label className='mt-2'>Type</label>
                       <select className="form-select mt-1" onChange={(e)=> setPetsType(e.target.value)}>
                         {
@@ -149,8 +175,8 @@ function AddPets() {
                         <option defaultValue="sick">Sick</option>
                         <option defaultValue="pregnant">Pregnant</option>
                       </select>
-                      <label className='mt-2'>Date Birth</label>
-                      <input className='form-control mt-1' type={'date'} onChange={(e)=> setPetsBorn(e.target.value)}></input>
+                      <label className='mt-2'>Date Birth <b className='label-warning'>{err_dateBorn}</b></label>
+                      <input className='form-control mt-1' type={'date'} onChange={(e)=> validateDateBorn(e.target.value)}></input>
                     </div>
                     <div className='col-lg-6 col-md-6 col-sm-12'>
                       <label className='mt-4'>Description <b className='label-info'>(Optional)</b></label>

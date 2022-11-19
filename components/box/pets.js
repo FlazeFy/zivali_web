@@ -6,6 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faMars, faVirus, faBowlFood, faBath, faHandSparkles, faBell, faHeart, faArrowRight, faArrowLeft, faTriangleExclamation, faVenus} from "@fortawesome/free-solid-svg-icons"
 import { faCalendar } from "@fortawesome/free-regular-svg-icons"
+import EditPets from '../layouts/edit-pets'
 
 const PetsBox = ({props, crslLength}) => {
     const [items, setItems] = useState([]);
@@ -99,11 +100,17 @@ const PetsBox = ({props, crslLength}) => {
         <>
             {
                 data.map((val, i, index) => {
+                    const modalTarget = "#editModal" + val.id;
+
                     if(i < 3 * crslLength){
                         if((crslLength > 1) && (i >= 3 * (crslLength -1)) && (i <= 3 * crslLength)){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
-                                    <div className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail">
+                                    <button className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail"
+                                        data-bs-toggle="modal" data-bs-target={modalTarget}>
+                                        {/* Modal */}
+                                        <EditPets props={val}/>
+
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
@@ -129,13 +136,16 @@ const PetsBox = ({props, crslLength}) => {
                                             <p>{nl2br(val.pets_desc)}</p>
                                             <p className='date-text'>Last updated : {dateConverter(val.updated_at)}</p>
                                         </div>
-                                    </div>
+                                    </button>
                                 </div>
                             )
                         } else if(crslLength == 1){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
-                                    <div className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail">
+                                    <button className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail"
+                                        data-bs-toggle="modal" data-bs-target={modalTarget}>
+                                        {/* Modal */}
+                                        <EditPets props={val}/>
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
@@ -161,7 +171,7 @@ const PetsBox = ({props, crslLength}) => {
                                             <p>{nl2br(val.pets_desc)}</p>
                                             <p className='date-text'>Last updated : {dateConverter(val.updated_at)}</p>
                                         </div>
-                                    </div>
+                                    </button>
                                 </div>
                             )
                         }

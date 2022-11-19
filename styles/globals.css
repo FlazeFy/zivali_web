@@ -195,6 +195,10 @@ a {
   /* background-color:rgb(135, 139, 213); */
   background-size: cover;
   transition: 0.6s;
+  text-align: start;
+  margin: 0px;
+  padding: 0px;
+  border: none;
 }
 .pets_box_body{
   border-radius: 10px;
@@ -307,4 +311,9 @@ a {
 .label-info{
   font-size: 12px;
   font-weight: 500;
+}
+.label-warning{
+  font-size: 12px;
+  font-weight: 500;
+  color:#d6416e !important;
 }
