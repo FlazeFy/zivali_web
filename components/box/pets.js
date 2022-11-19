@@ -106,11 +106,10 @@ const PetsBox = ({props, crslLength}) => {
                         if((crslLength > 1) && (i >= 3 * (crslLength -1)) && (i <= 3 * crslLength)){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
+                                    {/* Modal */}
+                                    <EditPets props={val}/>
                                     <button className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail"
                                         data-bs-toggle="modal" data-bs-target={modalTarget}>
-                                        {/* Modal */}
-                                        <EditPets props={val}/>
-
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
@@ -142,10 +141,10 @@ const PetsBox = ({props, crslLength}) => {
                         } else if(crslLength == 1){
                             return (
                                 <div className='col-4 pe-0' key={val.id}>
+                                    {/* Modal */}
+                                    <EditPets props={val}/>
                                     <button className='pets_box m-0' style={{'backgroundImage': "url('../../"+val.pets_url_image+"')", 'backgroundColor': getColorSet(i) }} title="See Detail"
                                         data-bs-toggle="modal" data-bs-target={modalTarget}>
-                                        {/* Modal */}
-                                        <EditPets props={val}/>
                                         <div className='pets_box_body'>
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>

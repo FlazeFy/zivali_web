@@ -55,4 +55,42 @@ router.post('/addPets/:id', (req, res) => {
     })
 })
 
+router.put('/editPets/:id', (req, res) => {
+    const id = req.params.id;
+    const pets_name = req.body.pets_name
+    const pets_type = req.body.pets_type
+    const pets_desc = req.body.pets_desc
+    const pets_status = req.body.pets_status
+    const pets_born = req.body.pets_born
+    const updated_at = new Date()
+
+    connection.query("UPDATE " +
+        "pets SET pets_name = ?, pets_type = ?, pets_desc = ?, pets_status = ?, pets_born = ?, updated_at = ? " +
+        "WHERE id = ? ",
+        [pets_name, pets_type, pets_desc, pets_status, pets_born, updated_at, id], (error, rows, fields) => {
+        if (error) {
+            res.status(400).json({ msg: "Error :" + error })
+        } else {
+            res.status(200).json({ msg: "Edit Pets detail Success",status:200, data: rows })
+        }
+    })
+})
+
+router.put('/editGender/:id', (req, res) => {
+    const id = req.params.id;
+    const pets_gender = req.body.pets_gender
+    const updated_at = new Date()
+
+    connection.query("UPDATE " +
+        "pets SET pets_gender = ?, updated_at = ? " +
+        "WHERE id = ? ",
+        [pets_gender, updated_at, id], (error, rows, fields) => {
+        if (error) {
+            res.status(400).json({ msg: "Error :" + error })
+        } else {
+            res.status(200).json({ msg: "Edit Gender Success",status:200, data: rows })
+        }
+    })
+})
+
 module.exports = router

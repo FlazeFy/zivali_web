@@ -16,11 +16,11 @@ const EditPets = ({props}) => {
     const [nav, setToogleNav] = useState(false);
     var [petsGender, setGender] = useState("");
     const [favorite, setFavorite] = useState(false);
-    var [petsName, setPetsName] = useState("");
+    const [petsName, setPetsName] = useState("");
     const [petsType, setPetsType] = useState("");
     const [petsStatus, setPetsStatus] = useState("");
     var [petsBorn, setPetsBorn] = useState("");
-    var [petsDesc, setPetsDesc] = useState("");
+    const [petsDesc, setPetsDesc] = useState("");
     var [petsUrlImage, setPetsUrlImage] = useState("");
     const [items, setItems] = useState([]);
 
@@ -44,27 +44,47 @@ const EditPets = ({props}) => {
     },[])
 
     const modalId = "editModal" + props.id;
-    petsName = props.pets_name;
-    petsDesc = props.pets_desc;
-    petsBorn = props.pets_born;
-    petsGender = props.pets_gender;
-    petsUrlImage = props.pets_url_image;
 
-    //Insert new pets
-    async function editPets (e) {
+    //Edit pets
+    async function editPets (e, id, val) {
       // e.preventDefault();
-      const pets_name = petsName
-      const pets_type = petsDesc
-      const pets_gender = petsGender
-      const pets_desc = petsDesc
-      const pets_status = petsStatus
-      const pets_born = petsBorn
+
+      if(petsName.length != 0){
+        const pets_name = petsName
+      } else {
+        const pets_name = props.pets_name
+      }
+
+      //Cant select pets type
+      if(petsType.length != 0){
+        const pets_type = petsType
+      } else {
+        const pets_type = props.pets_type
+      }
+
+      //Cant insert desc
+      if(petsDesc.length != 0){
+        const pets_desc = petsDesc
+      } else {
+        const pets_desc = props.pets_desc
+      }
+
+      if(petsStatus.length != 0){
+        const pets_status = petsStatus
+      } else {
+        const pets_status = props.pets_status
+      }
+      
+      if(petsBorn.length != 0){
+        const pets_born = petsBorn
+      } else {
+        const pets_born = props.pets_born
+      }
 
       try {
-        await Axios.post("http://localhost:9000/editPets/1", {
+        await Axios.put("http://localhost:9000/editPets/"+id, {
           pets_name,
           pets_type,
-          pets_gender,
           pets_desc,
           pets_status,
           pets_born
@@ -74,17 +94,34 @@ const EditPets = ({props}) => {
       }
     };
 
+    const editGender = async (e) => {
+      var pets_gender = petsGender[0]
+      var id = petsGender[1]
+
+      try {
+        await Axios.put("http://localhost:9000/editGender/"+id, {
+          pets_gender
+        });
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+
     //Converter
     const data = Object.values(items);
 
-    function getButtonGender(){
-      if(petsGender == "male"){
+    function getButtonGender(id, gender){
+      if(gender == "male"){
         return (
-          <button className='btn-form-header-toogle male' title='Set gender Male' onClick={(e) => setGender("female")}><FontAwesomeIcon icon={faMars} width="20px"/></button>
+          <form onSubmit={editGender} className="d-inline m-0 p-0">
+            <button className='btn-form-header-toogle male' title='Set gender Male' onClick={(e) => setGender(["female", id])} type="submit"><FontAwesomeIcon icon={faMars} width="20px"/></button>
+          </form>
         );
       } else {
         return (
-          <button className='btn-form-header-toogle female' title='Set gender Female' onClick={(e) => setGender("male")}><FontAwesomeIcon icon={faVenus} width="20px"/></button>
+          <form onSubmit={editGender} className="d-inline m-0 p-0">
+            <button className='btn-form-header-toogle female' title='Set gender Female' onClick={(e) => setGender(["male", id])} type="submit"><FontAwesomeIcon icon={faVenus} width="20px"/></button>
+          </form>
         );
       }
     }
@@ -128,25 +165,31 @@ const EditPets = ({props}) => {
         // <option defaultValue="sick">Sick</option>
         // <option defaultValue="pregnant">Pregnant</option>
         var arr_status = ["healthy", "sick", "pregnant"];
-
-        arr_status.forEach(e => {
-            if(e == status){
-                return (
-                    <option selected defaultValue={e}>{e}</option>
-                );
-            } else {
-                return (
-                    <option defaultValue={e}>{e}</option>
-                );
+        
+        return (
+          <select className="form-select mt-1" onChange={(e)=> setPetsStatus(e.target.value)}>
+            {
+              arr_status.map((e, i, index) => {
+                  if(e == status){
+                      return (
+                          <option selected defaultValue={e}>{e}</option>
+                      );
+                  } else {
+                      return (
+                          <option defaultValue={e}>{e}</option>
+                      );
+                  }
+              })
             }
-        }); 
+          </select>
+        );
     
     }
 
     function getSubmitButton(){
-        if((petsName.length != 0)&&(typeof document !== "undefined")&&(err_dateBorn == "")&&(err_petsName == "")){
+        if((props.pets_name.length != 0)&&(typeof document !== "undefined")&&(err_dateBorn == "")&&(err_petsName == "")){
           return (
-            <button className='btn-form-header-toogle save float-end' title='Save new pets' style={{'marginRight': "15px" }} onClick={(e)=> addPets()}
+            <button className='btn-form-header-toogle save float-end' title='Save new pets' style={{'marginRight': "15px" }} onClick={(e)=> editPets(e,props.id,props)}
               ><FontAwesomeIcon icon={faSave} width="20px"/></button>
           );
         } 
@@ -166,14 +209,14 @@ const EditPets = ({props}) => {
                     <div className="modal-body">
                         <h5 className="modal-title" id="exampleModalLabel">Edit Pets</h5>
                         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        <div className='modal-select-image-show' id='showUploadImage' style={{'background-image': "url('../../"+petsUrlImage+"')" }}>
+                        <div className='modal-select-image-show' id='showUploadImage' style={{'background-image': "url('../../"+props.pets_url_image+"')" }}>
                             <input type="file"  accept="image/*" name="image" id="file"  onChange={(e)=> loadFile(e)} className='d-none'></input>
                         </div>
                         <div className='modal-form-body'>
                             <div className='row modal-body-header-set'>
                                 <label htmlFor="file" className="btn-form-header-toogle upload p-3" title='Upload Image'> <FontAwesomeIcon icon={faImage} width="20px"/> </label>
                                 {getButtonFavorite()}
-                                {getButtonGender()}
+                                {getButtonGender(props.id, props.pets_gender)}
                                 {getSubmitButton()}
                                 <button className='btn-form-header-toogle save float-end' title='See detail'><FontAwesomeIcon icon={faInfo} width="10px"/></button>
                             </div>
@@ -181,7 +224,7 @@ const EditPets = ({props}) => {
                             <div className='row'>
                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                 <label className='mt-4 text-dark'>Pets Name <b className='label-warning'>{err_petsName}</b></label>
-                                <input className='form-control mt-1' type={'text'} onChange={(e)=> validatePetsName(e.target.value)} onBlur={(e)=> getSubmitButton()} defaultValue={petsName}></input>
+                                <input className='form-control mt-1' type={'text'} onChange={(e)=> validatePetsName(e.target.value)} onBlur={(e)=> getSubmitButton()} defaultValue={props.pets_name}></input>
                                 <label className='mt-2 text-dark'>Type</label>
                                 <select className="form-select mt-1" onChange={(e)=> setPetsType(e.target.value)}>
                                     {
@@ -195,16 +238,13 @@ const EditPets = ({props}) => {
                                     }
                                 </select>
                                 <label className='mt-2 text-dark'>Status</label>
-                                <select className="form-select mt-1" onChange={(e)=> setPetsStatus(e.target.value)}>
-                                    {/* Not shown */}
-                                    {getSlctdStatus(props.pets_status)}
-                                </select>
+                                {getSlctdStatus(props.pets_status)}
                                 <label className='mt-2 text-dark'>Date Birth <b className='label-warning'>{err_dateBorn}</b></label>
-                                <input className='form-control mt-1' type={'date'} onChange={(e)=> validateDateBorn(e.target.value)} defaultValue={petsBorn}></input>
+                                <input className='form-control mt-1' type={'date'} onChange={(e)=> validateDateBorn(e.target.value)} defaultValue={props.pets_born}></input>
                                 </div>
                                 <div className='col-lg-6 col-md-6 col-sm-12'>
                                 <label className='mt-4 text-dark'>Description <b className='label-info'>(Optional)</b></label>
-                                <textarea className='form-control mt-1' type={'text'} rows="4" defaultValue={petsDesc} onChange={(e)=> setPetsDesc(e.target.value)}></textarea>
+                                <textarea className='form-control mt-1' type={'text'} rows="4" defaultValue={props.pets_desc} onChange={(e)=> setPetsDesc(e.target.value)}></textarea>
                                 </div>
                             </div>
                             </form>
