@@ -15,7 +15,7 @@ const EditPets = ({props}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [nav, setToogleNav] = useState(false);
     var [petsGender, setGender] = useState("");
-    const [favorite, setFavorite] = useState(false);
+    const [petsFavorite, setFavorite] = useState("");
     const [petsName, setPetsName] = useState("");
     const [petsType, setPetsType] = useState("");
     const [petsStatus, setPetsStatus] = useState("");
@@ -107,6 +107,19 @@ const EditPets = ({props}) => {
       }
     };
 
+    const editFavorite = async (e) => {
+      var pets_favorite = petsFavorite[0]
+      var id = petsFavorite[1]
+
+      try {
+        await Axios.put("http://localhost:9000/editFavorite/"+id, {
+          pets_favorite
+        });
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+
     //Converter
     const data = Object.values(items);
 
@@ -126,14 +139,18 @@ const EditPets = ({props}) => {
       }
     }
 
-    function getButtonFavorite(){
-      if(favorite == false){
+    function getButtonFavorite(id, favorite){
+      if(favorite == "false"){
         return (
-          <button className='btn-form-header-toogle favorite' title='Add to favorite pets' onClick={(e) => setFavorite(true)}><FontAwesomeIcon icon={faHeart} width="20px"/></button>
+          <form onSubmit={editFavorite} className="d-inline m-0 p-0">
+            <button className='btn-form-header-toogle favorite' title='Add to favorite pets' onClick={(e) => setFavorite(["true", id])}><FontAwesomeIcon icon={faHeart} width="20px"/></button>
+          </form>
         );
       } else {
         return (
-          <button className='btn-form-header-toogle normal' title='Remove from favorite pets' onClick={(e) => setFavorite(false)}><FontAwesomeIcon icon={faHeart} width="20px"/></button>
+          <form onSubmit={editFavorite} className="d-inline m-0 p-0">
+            <button className='btn-form-header-toogle normal' title='Remove from favorite pets' onClick={(e) => setFavorite(["false", id])}><FontAwesomeIcon icon={faHeart} width="20px"/></button>
+          </form>
         );
       }
     }
@@ -215,7 +232,7 @@ const EditPets = ({props}) => {
                         <div className='modal-form-body'>
                             <div className='row modal-body-header-set'>
                                 <label htmlFor="file" className="btn-form-header-toogle upload p-3" title='Upload Image'> <FontAwesomeIcon icon={faImage} width="20px"/> </label>
-                                {getButtonFavorite()}
+                                {getButtonFavorite(props.id, props.pets_favorite)}
                                 {getButtonGender(props.id, props.pets_gender)}
                                 {getSubmitButton()}
                                 <button className='btn-form-header-toogle save float-end' title='See detail'><FontAwesomeIcon icon={faInfo} width="10px"/></button>

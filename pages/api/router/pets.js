@@ -44,9 +44,9 @@ router.post('/addPets/:id', (req, res) => {
     const updated_at = new Date()
 
     connection.query("INSERT INTO " +
-        "pets (id, user_id, pets_name, pets_type, pets_gender, pets_desc, pets_status, pets_born, pets_url_image, pets_url_video, created_at, updated_at) " +
+        "pets (id, user_id, pets_name, pets_type, pets_gender, pets_desc, pets_status, pets_favorite, pets_born, pets_url_image, pets_url_video, created_at, updated_at) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-        [null, id, pets_name, pets_type, pets_gender, pets_desc, pets_status, pets_born, pets_url_image, pets_url_video, created_at, updated_at], (error, rows, fields) => {
+        [null, id, pets_name, pets_type, pets_gender, pets_desc, pets_status, "false", pets_born, pets_url_image, pets_url_video, created_at, updated_at], (error, rows, fields) => {
         if (error) {
             res.status(400).json({ msg: "Error :" + error })
         } else {
@@ -89,6 +89,23 @@ router.put('/editGender/:id', (req, res) => {
             res.status(400).json({ msg: "Error :" + error })
         } else {
             res.status(200).json({ msg: "Edit Gender Success",status:200, data: rows })
+        }
+    })
+})
+
+router.put('/editFavorite/:id', (req, res) => {
+    const id = req.params.id;
+    const pets_favorite = req.body.pets_favorite
+    const updated_at = new Date()
+
+    connection.query("UPDATE " +
+        "pets SET pets_favorite = ?, updated_at = ? " +
+        "WHERE id = ? ",
+        [pets_favorite, updated_at, id], (error, rows, fields) => {
+        if (error) {
+            res.status(400).json({ msg: "Error :" + error })
+        } else {
+            res.status(200).json({ msg: "Edit Favorite Success",status:200, data: rows })
         }
     })
 })

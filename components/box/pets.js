@@ -95,6 +95,15 @@ const PetsBox = ({props, crslLength}) => {
             );
         }
     }
+
+    //Pets favorite
+    function getPetsFavorite(favorite){
+        if(favorite == "true"){
+            return (
+                <button className='btn-danger' title='My Favorite'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
+            );
+        }
+    }
   
     return (
         <>
@@ -114,7 +123,7 @@ const PetsBox = ({props, crslLength}) => {
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
                                                 {/* Pets favorite */}
-                                                <button className='btn-danger' title='My Favorite'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
+                                                {getPetsFavorite(val.pets_favorite)}
                                                 {/* Pets age */}
                                                 <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> {ageConvert(val.pets_born)}</button>
                                                 {/* Pets gender */}
@@ -149,7 +158,7 @@ const PetsBox = ({props, crslLength}) => {
                                             <h3 className='mb-2'>{val.pets_name}</h3>
                                             <div className='pets_tag-holder'>
                                                 {/* Pets favorite */}
-                                                <button className='btn-danger' title='My Favorite'><FontAwesomeIcon icon={faHeart} width="14.5px"/></button>
+                                                {getPetsFavorite(val.pets_favorite)}
                                                 {/* Pets age */}
                                                 <button className='btn-tag' title='Age'><FontAwesomeIcon icon={faCalendar} width="13px"/> {ageConvert(val.pets_born)}</button>
                                                 {/* Pets gender */}
